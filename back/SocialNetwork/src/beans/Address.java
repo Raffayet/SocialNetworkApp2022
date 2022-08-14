@@ -2,37 +2,37 @@ package beans;
 
 
 public class Address {
-	private String ulica;
-	private String broj;
-	
-	public Address() {
-		
-	}
+    private String ulica;
+    private String broj;
 
-	public Address(String ulica, String broj) {
-		this();
-		this.ulica = ulica;
-		this.broj = broj;
-	}
+    public Address() {
 
-	public String getUlica() {
-		return ulica;
-	}
+    }
 
-	public void setUlica(String ulica) {
-		this.ulica = ulica;
-	}
+    public Address(String ulica, String broj) {
+        this();
+        this.ulica = ulica;
+        this.broj = broj;
+    }
 
-	public String getBroj() {
-		return broj;
-	}
+    public String getUlica() {
+        return ulica;
+    }
 
-	public void setBroj(String broj) {
-		this.broj = broj;
-	}
+    public void setUlica(String ulica) {
+        this.ulica = ulica;
+    }
 
-	@Override
-	public String toString() {
-		return "Address [ulica=" + ulica + ", broj=" + broj + "]";
-	}
+    public String getBroj() {
+        return broj;
+    }
+
+    public void setBroj(String broj) {
+        this.broj = broj;
+    }
+
+    @Override
+    public String toString() {
+        return "Address [ulica=" + ulica + ", broj=" + broj + "]";
+    }
 }
