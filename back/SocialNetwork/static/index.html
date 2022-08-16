@@ -1,143 +1,24 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
-<head>
-<link rel="stylesheet" href="css/style.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JAX-RS demo</title>
-<script src="jquery.min.js"></script>
-<script type="text/javascript">
-function getFormData($form){
-    var unindexed_array = $form.serializeArray();
-    var indexed_array = {};
+    <head>
+        <script type="text/javascript" src="abc.json"></script>
+             <script type="text/javascript" >
+                function load() {
+                     var mydata = JSON.parse(data);
+                     alert(mydata.length);
 
-    $.map(unindexed_array, function(n, i){
-        indexed_array[n['name']] = n['value'];
-    });
+                     var div = document.getElementById('data');
 
-    return indexed_array;
-}
+                     for(var i = 0;i < mydata.length; i++)
+                     {
+                        div.innerHTML = div.innerHTML + "<p class='inner' id="+i+">"+ mydata[i].name +"</p>" + "<br>";
+                     }
+                 }
+        </script>
+    </head>
+    <body onload="load()">
+    <div id= "data">
 
-/*
- * Šalje AJAX zahtev ka testjson REST servisu.
- * Kao parametar POST metode, šalje objekat klase Student, zapakovan u JSON.
- * Prima takođe JSON string, koji je takođe objekat klase Student, a koji 
- * vraća testjson REST servis.
- */
-function sendStudent() {
-	var $form = $("#jsonform");
-	var data = getFormData($form);
-	var s = JSON.stringify(data);
-	$.ajax({
-		url: "rest/demo/testjson",
-		type:"POST",
-		data: s,
-		contentType:"application/json",
-		dataType:"json",
-		complete: function(data) {
-			$( "#result" ).html( data.responseText );
-		}
-	});
-}
-
-function login() {
-	var $form = $("#login");
-	var data = getFormData($form);
-	var s = JSON.stringify(data);
-	console.log(data)
-	$.ajax({
-		url: "rest/demo/login",
-		type:"POST",
-		data: s,
-		contentType:"application/json",
-		dataType:"json",
-		complete: function(data) {
-			$( "#resultLogin" ).html( data.responseText );
-		}
-	});
-}
-
-</script>
-</head>
-<body>
- <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<form action="#">
-			<h1>Create Account</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your email for registration</span>
-			<input type="text" placeholder="Name" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Sign Up</button>
-		</form>
-	</div>
-	<div class="form-container sign-in-container">
-		<form id="login" >
-			<fieldset>
-				<legend>Prijava na sistem</legend>
-				    <input type="text" name="username"/><br />
-				    <input type="text" name="password"/><br />
-				    <input type="button" value="submit" onclick="login()"/> <br />
-				    <fieldset><div id="resultLogin">Rezultat poziva</div></fieldset><br />
-				<a href="rest/demo/testlogin">Test Login logike</a> <br />
-				<a href="rest/demo/logout">Logout</a> <br />
-			</fieldset>
-		</form> <br />
-		<form id="login">
-			<h1>Sign in</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your account</span>
-			<input type="text" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
-			<button onclick="login()">Sign In</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp">Sign Up</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<footer>
-	<p>
-		Created with <i class="fa fa-heart"></i> by
-		<a target="_blank" href="https://florin-pop.com">Florin Pop</a>
-		- Read how I created this and how you can join the challenge
-		<a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
-	</p>
-</footer>
-  <script>
-  const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
-
-signUpButton.addEventListener('click', () => {
-	container.classList.add("right-panel-active");
-});
-
-signInButton.addEventListener('click', () => {
-	container.classList.remove("right-panel-active");
-});
-  </script>
-</body>
+    </div>
+    </body>
 </html>
