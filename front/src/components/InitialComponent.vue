@@ -1,13 +1,24 @@
 <script>
+import axios from 'axios'
+
 export default {
-  data() {
+  data () {
     return {
-      message: 'Hello World!'
+      info: null
     }
-  }
+  },
+  mounted() {
+    axios
+      .get('/rest/demo/test', {
+        headers: {
+          'Content-Type': 'text/plain'
+        }
+      })
+      .then(response => (this.info = response))
+  } 
 }
 </script>
 
 <template>
-  <h1>{{ `Our first message: ${message}` }}</h1>
+  <h1>{{ `Our first message: ${this.info}` }}</h1>
 </template>
