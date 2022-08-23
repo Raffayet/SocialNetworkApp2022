@@ -1,0 +1,27 @@
+[ 
+
+     { 
+        "username":"admin", 
+        "password": "admin123", 
+        "email": "admin@gmail.com",
+        "firstName": "Admin",
+        "lastName": "Adminic",
+        "birthDate": "15.02.1999.",
+        "gender": "MALE",
+        "userType": "ADMINISTRATOR",
+        "profileImg": "http://placehold.it/32x32",
+        "isPrivate": true
+     },
+     { 
+        "username":"pera", 
+        "password": "pera", 
+        "email": "admin@gmail.com",
+        "firstName": "Admin",
+        "lastName": "Adminic",
+        "birthDate": "15.02.1999.",
+        "gender": "MALE",
+        "userType": "REGULAR_USER",
+        "profileImg": "http://placehold.it/32x32",
+        "isPrivate": true
+     }
+ ]
