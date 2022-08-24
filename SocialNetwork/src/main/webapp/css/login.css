@@ -1,0 +1,12 @@
+body {
+	height: 100%;
+}
+
+#login{
+	background-color: red;
+}
+
+.btn btn-primary{
+	width: 500px;
+	color:blue;
+}
