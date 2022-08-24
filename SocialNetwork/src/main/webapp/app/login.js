@@ -11,7 +11,7 @@ Vue.component("login",{
 	template:
 	`	
 		
-		 	<div style="margin-top:70px;">
+		 	<div style="margin-top:120px;">
 			 	<div class="container" id="container">
 					<div class="form-container sign-up-container">
 						<form action="#">
@@ -68,9 +68,8 @@ Vue.component("login",{
 					</div>
 				</div>
 			 	
-			 	
+			 	<link rel="stylesheet" href="css/login.css" type="text/css">
 			</div>
-		
 		</div>
 		
 	`
