@@ -6,13 +6,29 @@ Vue.component("feed",{
         }
     },
 	template:
-	`	<p>dobro dosli</p>
+	`	
+		<div class="container">
+			<p>Dobro dosli</p>
+			<button style="backgroundColor:#FF416C; borderRadius:10px; marginTop:650px; marginLeft:590px;" v-on:click="logOut" type="button">Log Out</button>
+		</div>
 	`
 	,
 	methods:{
 		selectPosts: function(post, user){
 			console.log(post.text);
 			this.$router.push({name:'post', params:{post:post, user:user}});
+		},
+		
+		logOut: function(){
+			axios.post('rest/login/logout')
+				.then((res) => {
+						this.$router.push('/login');
+	                 })
+	                 .catch((error) => {
+						console.log(error)
+	                 }).finally(() => {
+	                    
+	                 });
 		}
 	}
 	,
