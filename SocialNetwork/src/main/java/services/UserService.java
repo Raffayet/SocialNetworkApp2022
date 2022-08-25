@@ -48,4 +48,20 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		return userDao.findAll();
 	}
+	
+	@POST
+	@Path("/register")
+	@Consumes(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
+	public Response register(HashMap<String, String> values) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User userExists = userDao.getByUsername(values.get("username"));
+		if (userExists != null) {
+			return Response.status(400).entity("User already exists").build();
+		}
+		User newuser = new User(values.get("username"), values.get("password"), values.get("email"), values.get("name"), values.get("lastName"), values.get("dateOfBirth"), Gender.valueOf(values.get("gender")), UserType.REGULAR_USER, "", false);
+		userDao.addUser(newuser);
+		ctx.setAttribute("loggedUser", newuser);
+		return Response.status(200).build();
+	}
 }

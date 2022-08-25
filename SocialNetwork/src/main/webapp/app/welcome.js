@@ -16,7 +16,7 @@ Vue.component("welcome",{
         				</div>
         			  </div>
         			  <h1 style="color:white; marginTop:-150px; fontFamily:Impact; marginLeft:30px; marginBottom:200px;" >WELCOME TO OUR WEBSITE</h1>
-        			  <p style="color:white; fontSize:24px; marginTop:-150px; marginBottom:60px; fontFamily:Impact; marginLeft:150px;">Social Media App</p>
+        			  <p style="color:white; fontSize:24px; marginTop:-150px; marginBottom:60px; fontFamily:Impact; marginLeft:156px;">Social Media App</p>
 					 <button style="backgroundColor:#FF416C; borderRadius:10px; marginBottom:500px; marginLeft:130px;" @click="$router.push('login')" type="button">Login / Register</button>
 				</div>
 				<link rel="stylesheet" href="css/welcome.css" type="text/css">
