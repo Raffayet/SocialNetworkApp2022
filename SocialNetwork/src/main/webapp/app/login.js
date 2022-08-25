@@ -5,7 +5,21 @@ Vue.component("login",{
                 username: '',
                 password: ''
             },
-			loginError:false
+			loginError:false,
+			
+			formRegistration: {
+				username: '',
+                password: '',
+                confirmPassword: '',
+                email: '',
+                firstName: '',
+                lastName: '',
+                gender: 'MALE'
+			},
+			validationError: false,
+			passwordError: false,
+			submitError:false
+			
         }
     },
 	template:
@@ -13,28 +27,28 @@ Vue.component("login",{
 		
 		 	<div style="margin-top:120px;">
 			 	<div class="container" id="container">
-					<div class="form-container sign-up-container">
+					<div class="form-container sign-up-container" v-on:submit.prevent="checkFormRegistration">
 						<form action="#">
 							<h1>Create Account</h1>
 							
 							<span>or use your email for registration</span>
-							<input type="text" placeholder="Name" />
-							<input type="email" placeholder="Email" />
-							<input type="password" placeholder="Password" />
-							<input type="text" placeholder="Enter Username" name="username" >		
-							<input type="text"placeholder="Enter Name" name="name">
-							<input type="text"placeholder="Enter Last Name" name="lastname" >
-							<select name="gender"  class="btn btn-primary">
-											<option value="MALE">MALE</option>
-											<option value="FEMALE">FEMALE</option>
-										</select>
-										
-										
-										
-										<input type="password"  placeholder="Confirm Password" name="confirm">
-										
-										<input type="date"  placeholder="date" name="confirm" >
+							<input type="text" placeholder="Username" required v-model="formRegistration.username"/>
+							<input type="password" placeholder="Password" required v-model="formRegistration.password"/>
+							<input type="password"  placeholder="Confirm Password" name="confirm" required v-model="formRegistration.confirmPassword">
+							<input type="email" placeholder="Email" required v-model="formRegistration.email"/>
+							<input type="text" placeholder="First Name" name="firstName" required v-model="formRegistration.firstName">		
+							<input type="text"placeholder="Last Name" name="lastname" required v-model="formRegistration.lastName">
+							<select name="gender" v-model="formRegistration.gender" class="btn btn-primary">
+								<option value="MALE">MALE</option>
+								<option value="FEMALE">FEMALE</option>
+							</select>
 							<button>Sign Up</button>
+							<p v-if="submitError" class="error">
+								<b>User already exists!</b>
+							</p>
+							<p v-if="passwordError" class="error">
+								<b>Passwords don't match!</b>
+							</p>
 						</form>
 					</div>
 					<div class="form-container sign-in-container" v-on:submit.prevent="checkForm">
@@ -48,7 +62,7 @@ Vue.component("login",{
 							<button type="submit">Sign In</button>
 							<p v-if="loginError" class="error">
 									    <b>Wrong credentials!</b>
-									</p>
+							</p>
 						</form>
 						
 					</div>
@@ -76,22 +90,55 @@ Vue.component("login",{
 	,
 	methods:{
 		checkForm : function(){
-			var body={
-				"username":""+this.form.username,
-				"password":""+this.form.password
+			var body = {
+				"username": "" + this.form.username,
+				"password": "" + this.form.password
 			}
 			console.log(body);
 			axios.post('rest/login', body)
              .then((res) => {
-                 //Perform Success Action
-				console.log("Uspesno logovan korisnik!");
+                 
+				console.log("Successfully logged in!");
 				this.$router.push('/feed');
              })
              .catch((error) => {
                  this.loginError = true;
              }).finally(() => {
-                 //Perform action in always
+                 
              });
+		},
+		
+		checkFormRegistration : function(){
+			var registrationBody = {
+				"username": this.formRegistration.username,
+				"password": this.formRegistration.password,
+				"confirmPassword": this.formRegistration.confirmPassword,
+				"email": this.formRegistration.email,
+				"firstName": this.formRegistration.firstName,
+				"lastName": this.formRegistration.lastName,
+				"gender": this.formRegistration.gender
+			}
+			
+			if(this.formRegistration.password !== this.formRegistration.confirmPassword)
+			{
+				this.passwordError = true;
+			}
+			
+			else
+			{
+				console.log(registrationBody);
+				axios.post('rest/user/register', registrationBody)	
+					.then((res) => {
+           
+						console.log("Successful registration!");
+						this.$router.push('/feed');
+	                 })
+	                 .catch((error) => {
+	                     this.submitError = true;
+	                 }).finally(() => {
+	                    
+	                 });
+			}			
 		}
 	}
 	,

@@ -83,14 +83,14 @@ Vue.component("registration",{
 				console.log(this.form);
 				axios.post('rest/registration', this.form)
                  .then((res) => {
-                     //Perform Success Action
+           
 					console.log("Uspesno registrovan korisnik!");
 					this.$router.push('/feed');
                  })
                  .catch((error) => {
                      this.submitError = true;
                  }).finally(() => {
-                     //Perform action in always
+                    
                  });
 			}
 		}

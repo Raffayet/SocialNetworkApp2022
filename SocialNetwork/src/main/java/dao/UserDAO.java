@@ -1,7 +1,9 @@
 package dao;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -10,11 +12,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+
 import beans.User;
 
 public class UserDAO {
@@ -58,8 +66,9 @@ public class UserDAO {
 	}
 	
 	public void addUser(User user) {
-		this.users.put(user.getUsername(),user);
+		this.users.put(user.getUsername(), user);
 	}
+	
 	
 	public User getByUsername(String username) {
 		return users.get(username);
