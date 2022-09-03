@@ -1,0 +1,14 @@
+.editForm{
+	background: transparent;
+	column-span: auto auto;
+	margin-top:75px;
+}
+
+.textfield{
+	margin-top:20px;
+	margin-bottom:20px;
+	opacity: 0.7;
+	border-radius:10px;
+	width:40%;
+	margin-right: auto;
+}

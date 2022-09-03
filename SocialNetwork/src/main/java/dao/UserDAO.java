@@ -77,5 +77,4 @@ public class UserDAO {
 	public Collection<User> findAll() {
 		return users.values();
 	}
-	
 }

@@ -1,12 +1,11 @@
-Vue.component("feed",{
+Vue.component("editProfile",{
 	data(){
         return{
-            friends:null,
-            loggedUser: '' 
+            friends:null 
         }
     },
 	template:
-	`
+	`	
 		<div class='root'>
 			<div style="display:flex;">
 				<div class="d-flex justify-content-center h-100">
@@ -19,43 +18,38 @@ Vue.component("feed",{
 	    			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         		</div>
         		<img id="profile-icon" src="images/profilna.png" width="40px" height="40px" style="marginRight:20px;"/>
-        		<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; "v-on:click="editProfile" type="button">Edit Profile</button>
-				<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="logOut" type="button">Log Out</button>
+        		<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; "v-on:click="applyChanges" type="button">Apply Changes</button>
+				<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="cancel" type="button">Cancel</button>
         	</div>
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
-				<p style="color:white; fontSize:20px;">Dobro dosli</p>
+				<form class="editForm">
+					<input class="textfield" type="text" placeholder="Username" required />
+					<input class="textfield" type="password" placeholder="Old Password" required/>
+					<input class="textfield" type="password" placeholder="New Password" required/>
+					<input class="textfield" type="password"  placeholder="Confirm Password" name="confirm" required>
+					<input class="textfield" type="email" placeholder="Email" required/>
+					<input class="textfield" type="text" placeholder="First Name" name="firstName" required>		
+					<input class="textfield" type="text"placeholder="Last Name" name="lastname" required>
+				</form>
 			</div>
+			<link rel="stylesheet" href="css/editProfile.css" type="text/css">
+			<link rel="stylesheet" href="css/profilePicture.scss" type="text/css">
 		</div>
 	`
 	,
 	methods:{
-		
-		created: function () {
-		this.loggedUser = this.$route.params.username;
-		
-		},
-		
 		selectPosts: function(post, user){
 			console.log(post.text);
 			this.$router.push({name:'post', params:{post:post, user:user}});
 		},
 		
-		logOut: function(){
-			axios.post('rest/login/logout')
-				.then((res) => {
-						this.$router.push('/login');
-	                 })
-	                 .catch((error) => {
-						console.log(error)
-	                 }).finally(() => {
-	                    
-	                 });
+		applyChanges: function(){
+			console.log('da')
 		},
 		
-		editProfile: function(){
-			console.log(this.$route.params.username);
-			this.$router.push('/editProfile/' + this.$route.params.username);
-		}
+		cancel: function(){
+			this.$router.push('/feed/' + this.$route.params.username);
+		},
 	}
 	,
 	mounted(){
@@ -65,25 +59,14 @@ Vue.component("feed",{
 					console.log("Uspesno dobijeni postovi!");
 					this.friends = res.data;
 					console.log(this.friends);
+					//axios.get('rest/user/findByUsername')
                  })
                  .catch((error) => {
                      this.submitError = true;
                  }).finally(() => {
                      //Perform action in always
                  });
-			},
-			
-	created(){
-		
-		axios.get('rest/user/' + this.$route.params.username)
-            	.then((res) => {
-					console.log(res.data)
-                 })
-                 .catch((error) => {
-
-                 }).finally(() => {
-                     //Perform action in always
-                 });
-	}		
-			
+                 
+            
+	}
 })
