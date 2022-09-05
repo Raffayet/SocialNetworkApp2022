@@ -64,4 +64,11 @@ public class UserService {
 		ctx.setAttribute("loggedUser", newuser);
 		return Response.status(200).build();
 	}
+	
+	@POST
+	@Path("/posts")
+	public String fun() {
+		return "posts";
+	}
+	
 }

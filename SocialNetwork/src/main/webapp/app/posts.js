@@ -1,4 +1,4 @@
-Vue.component("feed",{
+Vue.component("posts",{
 	data(){
         return{
             friends:null 
@@ -20,10 +20,10 @@ Vue.component("feed",{
         		<img id="profile-icon" src="images/profilna.png" width="40px" height="40px" style="marginRight:20px;"/>
         		<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; " v-on:click="logOut" type="button">Edit Profile</button>
 				<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="logOut" type="button">Log Out</button>
-				<button style="backgroundColor:#5dbea3; height: 40px; padding:0 8px; ; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="postovi" type="button">Posts</button>
+				<button  style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="logOut" type="button">Posts</button>
         	</div>
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
-				<p style="color:white; fontSize:20px;">Dobro dosli</p>
+				<p style="color:white; fontSize:20px;">POSTOVI</p>
 			</div>
 		</div>
 	`
@@ -45,22 +45,19 @@ Vue.component("feed",{
 	                    
 	                 });
 		}
-		,
-		postovi :function(){
-	axios.post('user/posts')
+	}
+	,
+		posts: function(){
+			axios.post('rest/posts/posts')
 				.then((res) => {
-						this.$router.push('/user/posts');
+						this.$router.push('/posts');
 	                 })
 	                 .catch((error) => {
 						console.log(error)
 	                 }).finally(() => {
 	                    
 	                 });
-	
-	}
-	}
-	
-	,
+		},
 	mounted(){
 			axios.get('rest/feed')
                  .then((res) => {
