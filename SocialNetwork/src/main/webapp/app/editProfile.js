@@ -1,7 +1,24 @@
 Vue.component("editProfile",{
 	data(){
         return{
-            friends:null 
+            friends:null,
+            editForm: {
+				username:'',
+                oldPassword: '',
+                newPassword:'',
+                confirmPassword:'',
+                email:'',
+                firstName:'',
+                lastName:''
+            }, 
+            
+            password:'',
+            profileImg:'',
+            
+            validationError: false,
+			oldPasswordError: false,
+			confirmPasswordError:false,
+			oldBeforeNewError:false
         }
     },
 	template:
@@ -18,19 +35,34 @@ Vue.component("editProfile",{
 	    			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         		</div>
         		<img id="profile-icon" src="images/profilna.png" width="40px" height="40px" style="marginRight:20px;"/>
-        		<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; "v-on:click="applyChanges" type="button">Apply Changes</button>
-				<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="cancel" type="button">Cancel</button>
         	</div>
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
-				<form class="editForm">
-					<input class="textfield" type="text" placeholder="Username" required />
-					<input class="textfield" type="password" placeholder="Old Password" required/>
-					<input class="textfield" type="password" placeholder="New Password" required/>
-					<input class="textfield" type="password"  placeholder="Confirm Password" name="confirm" required>
-					<input class="textfield" type="email" placeholder="Email" required/>
-					<input class="textfield" type="text" placeholder="First Name" name="firstName" required>		
-					<input class="textfield" type="text"placeholder="Last Name" name="lastname" required>
+				<form class="editForm" v-on:submit.prevent="applyChanges">
+					<input class="textfield" type="password" placeholder="Old Password" v-model="editForm.oldPassword"/>
+					<input class="textfield" type="password" placeholder="New Password" v-model="editForm.newPassword"/>
+					<input class="textfield" type="password"  placeholder="Confirm Password" name="confirm" v-model="editForm.confirmPassword">
+					<input class="textfield" type="email" placeholder="Email" required v-model="editForm.email"/>
+					<input class="textfield" type="text" placeholder="First Name" name="firstName" required v-model="editForm.firstName">		
+					<input class="textfield" type="text"placeholder="Last Name" name="lastname" required v-model="editForm.lastName">
+					<img id="blah" alt="your image" width="100" height="100" />
+					<input class="inputFile" v-model="editForm.profileImg" type="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+					<div class="submit-cancel">
+						<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px;" type="submit">Apply Changes</button>
+						<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="cancel" type="button">Cancel</button>
+					</div>	
 				</form>
+				<p v-if="validationError" style="color:red;">
+		    		<b>Please fill out all fields!</b>
+	  			</p>
+				<p v-else-if="oldPasswordError" style="color:red;">
+					<b>Old password not valid!</b>
+				 </p>
+				<p v-else-if="confirmPasswordError" style="color:red;">
+					<b>Confirm your new password!</b>
+				</p>
+				<p v-else-if="oldBeforeNewError" style="color:red;">
+					<b>To change password, first enter the old one!</b>
+				</p>
 			</div>
 			<link rel="stylesheet" href="css/editProfile.css" type="text/css">
 			<link rel="stylesheet" href="css/profilePicture.scss" type="text/css">
@@ -44,7 +76,54 @@ Vue.component("editProfile",{
 		},
 		
 		applyChanges: function(){
-			console.log('da')
+			console.log(this.editForm.profileImg)
+			var editBody = {
+				"username": this.$route.params.username,
+				"password": this.editForm.newPassword,
+				"email": this.editForm.email,
+				"firstName": this.editForm.firstName,
+				"lastName": this.editForm.lastName
+			}
+			
+			if(this.editForm.email == "" || this.editForm.firstName == "" || this.editForm.lastName == ""){
+				this.validationError = true;
+			}
+			
+			
+			else if(this.editForm.oldPassword !== this.password && this.editForm.oldPassword !== '')
+			{
+				this.validationError = false;
+				this.oldPasswordError = true;
+			}
+			
+			
+			else if(this.editForm.newPassword != this.editForm.confirmPassword)
+			{
+				this.oldPasswordError = false;
+				this.confirmPasswordError = true;
+			}
+			
+			else if(this.editForm.newPassword != '' && this.editForm.oldPassword == '')
+			{
+				this.confirmPasswordError = false;
+				this.oldBeforeNewError = true;
+			}
+			
+			else{
+				axios.post('rest/user/edit', editBody)
+                 .then((res) => {
+                     //Perform Success Action
+					this.friends = res.data;
+					console.log(this.friends);
+					//axios.get('rest/user/findByUsername')
+					this.$root.$router.push('/feed/' + this.$route.params.username)
+                 })
+                 .catch((error) => {
+                     this.submitError = true;
+                 }).finally(() => {
+                     //Perform action in always
+                 });	
+			}
 		},
 		
 		cancel: function(){
@@ -68,5 +147,21 @@ Vue.component("editProfile",{
                  });
                  
             
+	},
+	
+	created(){
+		
+		axios.get('rest/user/' + this.$route.params.username)
+            	.then((res) => {
+					this.editForm.email = res.data.email
+					this.editForm.firstName = res.data.firstName
+					this.editForm.lastName = res.data.lastName
+					this.password = res.data.password
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
 	}
 })

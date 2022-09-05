@@ -77,4 +77,12 @@ public class UserDAO {
 	public Collection<User> findAll() {
 		return users.values();
 	}
+
+	public void editUser(User userToEdit, HashMap<String, String> values) {
+		if (!values.get("password").equals(""))
+			userToEdit.setPassword(values.get("password"));
+		userToEdit.setEmail(values.get("email"));
+		userToEdit.setFirstName(values.get("firstName"));
+		userToEdit.setLastName(values.get("lastName"));
+	}
 }
