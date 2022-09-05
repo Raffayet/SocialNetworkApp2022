@@ -82,7 +82,7 @@ Vue.component("login",{
 					</div>
 				</div>
 			 	
-			 	<link rel="stylesheet" href="css/login.css" type="text/css">
+			 	
 			</div>
 		</div>
 		
@@ -94,12 +94,17 @@ Vue.component("login",{
 				"username": "" + this.form.username,
 				"password": "" + this.form.password
 			}
-			console.log(body);
-			axios.post('rest/login', body)
+		
+			axios.post('rest/login', {
+			    username: body.username,
+			    password: body.password
+   			})
              .then((res) => {
-                 
+				const array = res.config.data.split("\"");
+				const loggedUsername = array[3]
+                console.log(loggedUsername); //array[3] je uvek username 
 				console.log("Successfully logged in!");
-				this.$router.push('/feed');
+				this.$root.$router.push('/feed/' + loggedUsername)
              })
              .catch((error) => {
                  this.loginError = true;

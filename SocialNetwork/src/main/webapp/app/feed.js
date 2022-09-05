@@ -1,11 +1,12 @@
 Vue.component("feed",{
 	data(){
         return{
-            friends:null 
+            friends:null,
+            loggedUser: '' 
         }
     },
 	template:
-	`	
+	`
 		<div class='root'>
 			<div style="display:flex;">
 				<div class="d-flex justify-content-center h-100">
@@ -18,7 +19,7 @@ Vue.component("feed",{
 	    			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         		</div>
         		<img id="profile-icon" src="images/profilna.png" width="40px" height="40px" style="marginRight:20px;"/>
-        		<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; " v-on:click="logOut" type="button">Edit Profile</button>
+        		<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; "v-on:click="editProfile" type="button">Edit Profile</button>
 				<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="logOut" type="button">Log Out</button>
         	</div>
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
@@ -28,6 +29,12 @@ Vue.component("feed",{
 	`
 	,
 	methods:{
+		
+		created: function () {
+		this.loggedUser = this.$route.params.username;
+		
+		},
+		
 		selectPosts: function(post, user){
 			console.log(post.text);
 			this.$router.push({name:'post', params:{post:post, user:user}});
@@ -43,6 +50,11 @@ Vue.component("feed",{
 	                 }).finally(() => {
 	                    
 	                 });
+		},
+		
+		editProfile: function(){
+			console.log(this.$route.params.username);
+			this.$router.push('/editProfile/' + this.$route.params.username);
 		}
 	}
 	,
@@ -59,5 +71,19 @@ Vue.component("feed",{
                  }).finally(() => {
                      //Perform action in always
                  });
-	}
+			},
+			
+	created(){
+		
+		axios.get('rest/user/' + this.$route.params.username)
+            	.then((res) => {
+					console.log(res.data)
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
+	}		
+			
 })

@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -62,6 +65,26 @@ public class UserService {
 		User newuser = new User(values.get("username"), values.get("password"), values.get("email"), values.get("name"), values.get("lastName"), values.get("dateOfBirth"), Gender.valueOf(values.get("gender")), UserType.REGULAR_USER, "", false);
 		userDao.addUser(newuser);
 		ctx.setAttribute("loggedUser", newuser);
+		return Response.status(200).build();
+	}
+	
+	@GET
+	@Path("{username}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUserByUsername(@PathParam("username") String username) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return userDao.getByUsername(username);
+	}
+	
+	@POST
+	@Path("/edit")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editUserProfile(HashMap<String, String> values) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User userToEdit = userDao.getByUsername(values.get("username"));
+		userDao.editUser(userToEdit, values);
 		return Response.status(200).build();
 	}
 }
