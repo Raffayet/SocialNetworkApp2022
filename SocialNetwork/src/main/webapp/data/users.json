@@ -9,19 +9,43 @@
         "birthDate": "15.02.1999.",
         "gender": "MALE",
         "userType": "ADMINISTRATOR",
-        "profileImg": "http://placehold.it/32x32",
+        "profileImg": "./images/pera.png",
         "isPrivate": true
      },
      { 
         "username":"pera", 
         "password": "pera", 
-        "email": "admin@gmail.com",
-        "firstName": "Admin",
-        "lastName": "Adminic",
+        "email": "pera@gmail.com",
+        "firstName": "Pera",
+        "lastName": "Peric",
         "birthDate": "15.02.1999.",
         "gender": "MALE",
         "userType": "REGULAR_USER",
-        "profileImg": "http://placehold.it/32x32",
+        "profileImg": "./images/pera.png",
+        "isPrivate": true
+     },
+     { 
+        "username":"mara", 
+        "password": "mara", 
+        "email": "mara@gmail.com",
+        "firstName": "Mara",
+        "lastName": "Maric",
+        "birthDate": "15.02.1999.",
+        "gender": "FEMALE",
+        "userType": "REGULAR_USER",
+        "profileImg": "./images/mara.jpg",
+        "isPrivate": true
+     },
+     { 
+        "username":"toma", 
+        "password": "toma", 
+        "email": "toma@gmail.com",
+        "firstName": "Toma",
+        "lastName": "Tomic",
+        "birthDate": "15.02.1999.",
+        "gender": "MALE",
+        "userType": "REGULAR_USER",
+        "profileImg": "./images/toma.jpg",
         "isPrivate": true
      }
  ]

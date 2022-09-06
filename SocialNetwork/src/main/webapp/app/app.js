@@ -6,6 +6,7 @@ const Feed = {template:'<feed></feed>'}
 const Navbar = {template:'<navbar></navbar>'}
 const Post = {template:'<post></post>'}
 const EditProfile = {template:'<editProfile></editProfile>'}
+const ViewProfile = {template:'<viewProfile></viewProfile>'}
 
 
 
@@ -20,6 +21,7 @@ const router = new VueRouter({
 		{path:'/searchPage/:text', component: SearchPage},
 		{path:'/post',name:'post', component: Post, props:true},
 		{path:'/editProfile/:username', component:EditProfile, props:true},
+		{path:'/viewProfile/:username', component:ViewProfile, props:true},
 	]
 });
 
