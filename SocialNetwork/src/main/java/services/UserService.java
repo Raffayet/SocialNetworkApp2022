@@ -87,4 +87,13 @@ public class UserService {
 		userDao.editUser(userToEdit, values);
 		return Response.status(200).build();
 	}
+	
+	@GET
+	@Path("/images/{username}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<String> getUserImages(@PathParam("username") String username) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return userDao.getByUsername(username).getImages();
+	}
 }

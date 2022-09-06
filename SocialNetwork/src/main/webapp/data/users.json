@@ -9,7 +9,7 @@
         "birthDate": "15.02.1999.",
         "gender": "MALE",
         "userType": "ADMINISTRATOR",
-        "profileImg": "./images/pera.png",
+        "profileImg": "./images/peraProfile.jpg",
         "isPrivate": true
      },
      { 
@@ -21,7 +21,8 @@
         "birthDate": "15.02.1999.",
         "gender": "MALE",
         "userType": "REGULAR_USER",
-        "profileImg": "./images/pera.png",
+        "profileImg": "./images/peraProfile.jpg",
+        "images":["./images/pera1.jpg", "./images/pera2.jpg", "./images/pera3.jpg"],
         "isPrivate": true
      },
      { 
@@ -33,7 +34,8 @@
         "birthDate": "15.02.1999.",
         "gender": "FEMALE",
         "userType": "REGULAR_USER",
-        "profileImg": "./images/mara.jpg",
+        "profileImg": "./images/maraProfile.jpg",
+        "images":["./images/mara1.jpg", "./images/mara2.jpg", "./images/mara3.jpg"],
         "isPrivate": true
      },
      { 
@@ -45,7 +47,8 @@
         "birthDate": "15.02.1999.",
         "gender": "MALE",
         "userType": "REGULAR_USER",
-        "profileImg": "./images/toma.jpg",
+        "profileImg": "./images/tomaProfile.jpg",
+        "images":["./images/toma1.jpg", "./images/toma2.jpg", "./images/toma3.jpg"],
         "isPrivate": true
      }
  ]

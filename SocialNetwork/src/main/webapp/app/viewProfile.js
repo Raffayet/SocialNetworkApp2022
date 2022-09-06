@@ -15,7 +15,8 @@ Vue.component("viewProfile",{
             password:'',
             profileImg:'',
             
-            path: 'images/' + this.$route.params.username + 'Profile.jpg',
+            path: './images/' + this.$route.params.username + 'Profile.jpg',
+            loadedImages: [],
             
             validationError: false,
 			oldPasswordError: false,
@@ -39,7 +40,10 @@ Vue.component("viewProfile",{
         		<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="back" type="button">Back</button>
         	</div>
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
-				<img id='profile-icon' class="profile-icon" src="getPath" width="70px" height="70px" style="marginLeft:45%; marginTop:40px;"/>
+				<img id='profile-icon' class="profile-icon" width="70px" height="70px" style="marginLeft:45%; marginTop:40px;"/>
+				<div class="my-images" v-for="loadedImage in this.loadedImages">
+					<img :src="loadedImage" width="70px" height="70px"/>
+				</div>
 			</div>
 			<link rel="stylesheet" href="css/viewProfile.scss" type="text/css">
 		</div>
@@ -53,10 +57,6 @@ Vue.component("viewProfile",{
 		
 		back: function(){
 			this.$root.$router.push('/feed/' + this.$route.params.username)
-		},
-		
-		getPath: function(){
-			return this.path;
 		}
 	}
 	,
@@ -81,12 +81,10 @@ Vue.component("viewProfile",{
 	
 	created(){
 		
-		axios.get('rest/user/' + this.$route.params.username)
+		axios.get('rest/user/images/' + this.$route.params.username)
             	.then((res) => {
-					this.editForm.email = res.data.email
-					this.editForm.firstName = res.data.firstName
-					this.editForm.lastName = res.data.lastName
-					this.password = res.data.password
+					this.loadedImages = res.data;
+					console.log(this.loadedImages[0])
                  })
                  .catch((error) => {
 
