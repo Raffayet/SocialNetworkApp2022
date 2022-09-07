@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -25,6 +26,7 @@ import javax.ws.rs.core.Response;
 
 import enums.Gender;
 import enums.UserType;
+import beans.Friend;
 import beans.Image;
 import beans.Post;
 import beans.User;
@@ -125,5 +127,24 @@ public class UserService {
 		userDao.deletePost(user, post);
 		userDao.deleteImage(user, imageId);
 		return Response.status(200).build();
+	}
+	
+	@GET
+	@Path("/friends/{username}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getUserFriends(@PathParam("username") String username) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User user = userDao.getByUsername(username);
+		List<Friend> activeFriends = userDao.getUserFriends(user);
+		
+		List<User> activeFriendsToUsers = new ArrayList<User>();
+		
+		for(Friend friend : activeFriends)
+		{
+			activeFriendsToUsers.add(userDao.getByUsername(friend.getUsername()));
+		}
+		
+		return activeFriendsToUsers;
 	}
 }

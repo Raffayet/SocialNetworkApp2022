@@ -31,6 +31,8 @@
         "images":[{"path": "./images/pera1.jpg", "deleted": false},
         		  {"path": "./images/pera2.jpg", "deleted": false}, 
         		  {"path": "./images/pera3.jpg", "deleted": false}],
+        "friends":[{"username": "mara", "active": true},
+        		   {"username": "toma", "active": true}],
         "posts": [
         	{
         		"picture": {"path": "./images/pera1.jpg", "deleted": false},
