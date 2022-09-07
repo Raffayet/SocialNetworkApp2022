@@ -43,7 +43,7 @@ Vue.component("viewProfile",{
 				<img id='profile-icon' class="profile-icon" width="70px" height="70px" style="marginLeft:45%; marginTop:40px;"/>
 				<h3 style="color:white; marginLeft:46%;">{{this.$route.params.username}}</h3>
 				<div class="my-images" v-for="loadedImage in this.loadedImages">
-					<img class='single-image' :src="loadedImage" width="180px" height="180px" @click="viewPost(loadedImage)"/>
+					<img class='single-image' :src="loadedImage.path" width="180px" height="180px" @click="viewPost(loadedImage.path)"/>
 				</div>
 			</div>
 			<link rel="stylesheet" href="css/viewProfile.css" type="text/css">

@@ -16,8 +16,8 @@ public class User {
 	private String birthDate;
 	public Gender gender;
 	public UserType userType;
-	private String profileImg;
-	private List<String> images;
+	private Image profileImg;
+	private List<Image> images;
 	private List<User> friends;
 	private List<Post> posts;
 	private List<FriendRequest> friendRequests;
@@ -29,7 +29,7 @@ public class User {
 	
 	
 	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
-			Gender gender, UserType userType, String profileImg, Boolean isPrivate) {
+			Gender gender, UserType userType, Image profileImg, Boolean isPrivate) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -46,7 +46,7 @@ public class User {
 	
 		
 	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
-			Gender gender, UserType userType, String profileImg, List<String> images, Boolean isPrivate) {
+			Gender gender, UserType userType, Image profileImg, List<Image> images, Boolean isPrivate) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -64,7 +64,7 @@ public class User {
 	
 	
 	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
-			Gender gender, UserType userType, String profileImg, List<String> images, List<Post> posts,
+			Gender gender, UserType userType, Image profileImg, List<Image> images, List<Post> posts,
 			Boolean isPrivate) {
 		super();
 		this.username = username;
@@ -83,7 +83,7 @@ public class User {
 
 
 	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
-			Gender gender, UserType userType, String profileImg, List<String> images, List<User> friends,
+			Gender gender, UserType userType, Image profileImg, List<Image> images, List<User> friends,
 			List<Post> posts, List<FriendRequest> friendRequests, Boolean isPrivate) {
 		super();
 		this.username = username;
@@ -200,25 +200,25 @@ public class User {
 
 
 
-	public String getProfileImg() {
+	public Image getProfileImg() {
 		return profileImg;
 	}
 
 
 
-	public void setProfileImg(String profileImg) {
+	public void setProfileImg(Image profileImg) {
 		this.profileImg = profileImg;
 	}
 
 
 
-	public List<String> getImages() {
+	public List<Image> getImages() {
 		return images;
 	}
 
 
 
-	public void setImages(List<String> images) {
+	public void setImages(List<Image> images) {
 		this.images = images;
 	}
 

@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSessionContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,6 +25,7 @@ import javax.ws.rs.core.Response;
 
 import enums.Gender;
 import enums.UserType;
+import beans.Image;
 import beans.Post;
 import beans.User;
 import dao.UserDAO;
@@ -63,7 +65,8 @@ public class UserService {
 		if (userExists != null) {
 			return Response.status(400).entity("User already exists").build();
 		}
-		User newuser = new User(values.get("username"), values.get("password"), values.get("email"), values.get("name"), values.get("lastName"), values.get("dateOfBirth"), Gender.valueOf(values.get("gender")), UserType.REGULAR_USER, "", false);
+		Image defaultImage = new Image("", false);
+		User newuser = new User(values.get("username"), values.get("password"), values.get("email"), values.get("name"), values.get("lastName"), values.get("dateOfBirth"), Gender.valueOf(values.get("gender")), UserType.REGULAR_USER, defaultImage, false);
 		userDao.addUser(newuser);
 		ctx.setAttribute("loggedUser", newuser);
 		return Response.status(200).build();
@@ -93,9 +96,11 @@ public class UserService {
 	@Path("/images/{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<String> getUserImages(@PathParam("username") String username) {
+	public List<Image> getUserImages(@PathParam("username") String username) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		return userDao.getByUsername(username).getImages();
+		User user = userDao.getByUsername(username);
+		List<Image> userActiveImages = userDao.getActiveImages(user);
+		return userActiveImages;
 	}
 	
 	@GET
@@ -107,5 +112,18 @@ public class UserService {
 		User user = userDao.getByUsername(username);
 		Post post = userDao.getPostByPicture(user, imageId);
 		return post;
+	}
+	
+	@DELETE
+	@Path("/delete-post/{username}/{imageId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deletePost(@PathParam("username") String username, @PathParam("imageId") String imageId) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User user = userDao.getByUsername(username);
+		Post post = userDao.getPostByPicture(user, imageId);
+		userDao.deletePost(user, post);
+		userDao.deleteImage(user, imageId);
+		return Response.status(200).build();
 	}
 }
