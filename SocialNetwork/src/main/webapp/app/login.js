@@ -136,7 +136,7 @@ Vue.component("login",{
 					.then((res) => {
            
 						console.log("Successful registration!");
-						this.$router.push('/feed');
+						this.$router.push('/feed/' + this.$route.params.username);
 	                 })
 	                 .catch((error) => {
 	                     this.submitError = true;
