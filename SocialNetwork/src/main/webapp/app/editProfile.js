@@ -34,7 +34,6 @@ Vue.component("editProfile",{
 					<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	    			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         		</div>
-        		<img id="profile-icon" src="images/profilna.png" width="40px" height="40px" style="marginRight:20px;"/>
         	</div>
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
 				<form class="editForm" v-on:submit.prevent="applyChanges">
@@ -47,8 +46,8 @@ Vue.component("editProfile",{
 					<img id="blah" alt="your image" width="100" height="100" />
 					<input class="inputFile" v-model="editForm.profileImg" type="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
 					<div class="submit-cancel">
-						<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px;" type="submit">Apply Changes</button>
-						<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="cancel" type="button">Cancel</button>
+						<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; cursor:pointer;" type="submit">Apply Changes</button>
+						<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="cancel" type="button">Cancel</button>
 					</div>	
 				</form>
 				<p v-if="validationError" style="color:red;">

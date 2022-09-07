@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 
+import beans.Post;
 import beans.User;
 
 public class UserDAO {
@@ -84,5 +85,15 @@ public class UserDAO {
 		userToEdit.setEmail(values.get("email"));
 		userToEdit.setFirstName(values.get("firstName"));
 		userToEdit.setLastName(values.get("lastName"));
+	}
+
+	public Post getPostByPicture(User user, String imageId) {
+		for(Post post : user.getPosts())
+		{
+			if (post.getPicture().equals("./images/" + imageId))
+				return post;
+		}
+		
+		return null;
 	}
 }

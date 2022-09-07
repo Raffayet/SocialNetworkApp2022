@@ -43,7 +43,45 @@ public class User {
 		this.isPrivate = isPrivate;
 	}
 	
+	
 		
+	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
+			Gender gender, UserType userType, String profileImg, List<String> images, Boolean isPrivate) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.userType = userType;
+		this.profileImg = profileImg;
+		this.images = images;
+		this.isPrivate = isPrivate;
+	}
+
+	
+	
+	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
+			Gender gender, UserType userType, String profileImg, List<String> images, List<Post> posts,
+			Boolean isPrivate) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.userType = userType;
+		this.profileImg = profileImg;
+		this.images = images;
+		this.posts = posts;
+		this.isPrivate = isPrivate;
+	}
+
+
 	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
 			Gender gender, UserType userType, String profileImg, List<String> images, List<User> friends,
 			List<Post> posts, List<FriendRequest> friendRequests, Boolean isPrivate) {
