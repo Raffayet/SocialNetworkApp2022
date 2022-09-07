@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 
+import beans.Image;
 import beans.Post;
 import beans.User;
 
@@ -90,10 +92,40 @@ public class UserDAO {
 	public Post getPostByPicture(User user, String imageId) {
 		for(Post post : user.getPosts())
 		{
-			if (post.getPicture().equals("./images/" + imageId))
+			if (post.getPicture().getPath().equals("./images/" + imageId) && !post.getDeleted())
 				return post;
 		}
 		
 		return null;
+	}
+
+	public void deletePost(User user, Post post) {
+		for(Post userPost : user.getPosts())
+		{
+			if(userPost.getPicture().equals(post.getPicture()))
+			{
+				post.setDeleted(true);
+			}
+		}
+	}
+
+	public void deleteImage(User user, String imageId) {
+		for(Image image : user.getImages())
+		{
+			if(image.getPath().equals("./images/" + imageId))
+				image.setDeleted(true);
+		}
+	}
+
+	public List<Image> getActiveImages(User user) {
+		
+		List<Image> activeImages = new ArrayList<Image>();
+		
+		for(Image image : user.getImages())
+		{
+			if(!image.getDeleted())
+				activeImages.add(image);
+		}
+		return activeImages;
 	}
 }
