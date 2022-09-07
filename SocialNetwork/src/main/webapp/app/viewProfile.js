@@ -37,15 +37,16 @@ Vue.component("viewProfile",{
 					<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	    			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         		</div>
-        		<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="back" type="button">Back</button>
+        		<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="back" type="button">Back</button>
         	</div>
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
 				<img id='profile-icon' class="profile-icon" width="70px" height="70px" style="marginLeft:45%; marginTop:40px;"/>
+				<h3 style="color:white; marginLeft:46%;">{{this.$route.params.username}}</h3>
 				<div class="my-images" v-for="loadedImage in this.loadedImages">
-					<img :src="loadedImage" width="70px" height="70px"/>
+					<img class='single-image' :src="loadedImage" width="180px" height="180px" @click="viewPost(loadedImage)"/>
 				</div>
 			</div>
-			<link rel="stylesheet" href="css/viewProfile.scss" type="text/css">
+			<link rel="stylesheet" href="css/viewProfile.css" type="text/css">
 		</div>
 	`
 	,
@@ -57,6 +58,11 @@ Vue.component("viewProfile",{
 		
 		back: function(){
 			this.$root.$router.push('/feed/' + this.$route.params.username)
+		},
+		
+		viewPost: function(imagePath){
+			const imagePathParts = imagePath.split('/')
+			this.$router.push('/viewPost/' + this.$route.params.username + '/' + imagePathParts[2]); //odnosi se na sufiks putanje
 		}
 	}
 	,

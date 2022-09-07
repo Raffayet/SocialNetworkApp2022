@@ -46,8 +46,8 @@ Vue.component("editProfile",{
 					<img id="blah" alt="your image" width="100" height="100" />
 					<input class="inputFile" v-model="editForm.profileImg" type="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
 					<div class="submit-cancel">
-						<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px;" type="submit">Apply Changes</button>
-						<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px;" v-on:click="cancel" type="button">Cancel</button>
+						<button style="backgroundColor:#5dbea3; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; marginBottom: 15px; cursor:pointer;" type="submit">Apply Changes</button>
+						<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="cancel" type="button">Cancel</button>
 					</div>	
 				</form>
 				<p v-if="validationError" style="color:red;">

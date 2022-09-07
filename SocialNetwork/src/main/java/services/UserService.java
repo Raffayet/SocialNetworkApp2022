@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response;
 
 import enums.Gender;
 import enums.UserType;
+import beans.Post;
 import beans.User;
 import dao.UserDAO;
 
@@ -95,5 +96,16 @@ public class UserService {
 	public List<String> getUserImages(@PathParam("username") String username) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		return userDao.getByUsername(username).getImages();
+	}
+	
+	@GET
+	@Path("/post/{username}/{imageId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Post getPostData(@PathParam("username") String username, @PathParam("imageId") String imageId) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User user = userDao.getByUsername(username);
+		Post post = userDao.getPostByPicture(user, imageId);
+		return post;
 	}
 }

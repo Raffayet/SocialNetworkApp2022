@@ -7,6 +7,7 @@ const Navbar = {template:'<navbar></navbar>'}
 const Post = {template:'<post></post>'}
 const EditProfile = {template:'<editProfile></editProfile>'}
 const ViewProfile = {template:'<viewProfile></viewProfile>'}
+const ViewPost = {template:'<viewPost></viewPost>'}
 
 
 
@@ -22,6 +23,7 @@ const router = new VueRouter({
 		{path:'/post',name:'post', component: Post, props:true},
 		{path:'/editProfile/:username', component:EditProfile, props:true},
 		{path:'/viewProfile/:username', component:ViewProfile, props:true},
+		{path:'/viewPost/:username/:imageId', component:ViewPost, props:true},
 	]
 });
 

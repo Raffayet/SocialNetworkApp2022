@@ -42,7 +42,7 @@ Vue.component("login",{
 								<option value="MALE">MALE</option>
 								<option value="FEMALE">FEMALE</option>
 							</select>
-							<button>Sign Up</button>
+							<button style="cursor: pointer;">Sign Up</button>
 							<p v-if="submitError" class="error">
 								<b>User already exists!</b>
 							</p>
@@ -59,7 +59,7 @@ Vue.component("login",{
 							<input type="text" class="form-control" id="floatingInput" placeholder="username" v-model="form.username" required/>
 							<input type="password" id="floatingPassword" class="form-control" placeholder="Password" v-model="form.password"  required />
 							<a href="#">Forgot your password?</a>
-							<button type="submit">Sign In</button>
+							<button type="submit" style="cursor:pointer;">Sign In</button>
 							<p v-if="loginError" class="error">
 									    <b>Wrong credentials!</b>
 							</p>
@@ -71,12 +71,12 @@ Vue.component("login",{
 							<div class="overlay-panel overlay-left">
 								<h1>Welcome Back!</h1>
 								<p>To keep connected with us please login with your personal info</p>
-								<button class="ghost" id="signIn">Sign In</button>
+								<button class="ghost" id="signIn" style="cursor:pointer;">Sign In</button>
 							</div>
 							<div class="overlay-panel overlay-right">
 								<h1>Hello, Friend!</h1>
 								<p>Enter your personal details and start journey with us</p>
-								<button class="ghost" id="signUp">Sign Up</button>
+								<button class="ghost" id="signUp" style="cursor:pointer;">Sign Up</button>
 							</div>
 						</div>
 					</div>

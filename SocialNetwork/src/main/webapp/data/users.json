@@ -23,6 +23,58 @@
         "userType": "REGULAR_USER",
         "profileImg": "./images/peraProfile.jpg",
         "images":["./images/pera1.jpg", "./images/pera2.jpg", "./images/pera3.jpg"],
+        "posts": [
+        	{
+        		"picture": "./images/pera1.jpg",
+        		"text": "Roses are red, violets are blue.",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "Ne svidja mi se.",
+        				"deleted": false
+        			},
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			}
+        		]
+        	},
+        	
+        	{
+        		"picture": "./images/pera2.jpg",
+        		"text": "Jedna lepa slika iz Madjarske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		]
+        	}
+       ],
         "isPrivate": true
      },
      { 
