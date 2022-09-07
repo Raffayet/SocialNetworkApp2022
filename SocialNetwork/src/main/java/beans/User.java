@@ -18,14 +18,14 @@ public class User {
 	public UserType userType;
 	private Image profileImg;
 	private List<Image> images;
-	private List<User> friends;
+	private List<Friend> friends;
 	private List<Post> posts;
 	private List<FriendRequest> friendRequests;
 	private Boolean isPrivate;
 	
 	public User() {
 			
-		}
+	}
 	
 	
 	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
@@ -81,9 +81,29 @@ public class User {
 		this.isPrivate = isPrivate;
 	}
 
+	
+	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
+			Gender gender, UserType userType, Image profileImg, List<Image> images, List<Friend> friends,
+			List<Post> posts, Boolean isPrivate) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.userType = userType;
+		this.profileImg = profileImg;
+		this.images = images;
+		this.friends = friends;
+		this.posts = posts;
+		this.isPrivate = isPrivate;
+	}
+
 
 	public User(String username, String password, String email, String firstName, String lastName, String birthDate,
-			Gender gender, UserType userType, Image profileImg, List<Image> images, List<User> friends,
+			Gender gender, UserType userType, Image profileImg, List<Image> images, List<Friend> friends,
 			List<Post> posts, List<FriendRequest> friendRequests, Boolean isPrivate) {
 		super();
 		this.username = username;
@@ -224,13 +244,13 @@ public class User {
 
 
 
-	public List<User> getFriends() {
+	public List<Friend> getFriends() {
 		return friends;
 	}
 
 
 
-	public void setFriends(List<User> friends) {
+	public void setFriends(List<Friend> friends) {
 		this.friends = friends;
 	}
 

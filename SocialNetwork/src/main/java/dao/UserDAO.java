@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 
+import beans.Friend;
 import beans.Image;
 import beans.Post;
 import beans.User;
@@ -127,5 +128,18 @@ public class UserDAO {
 				activeImages.add(image);
 		}
 		return activeImages;
+	}
+
+	public List<Friend> getUserFriends(User user) {
+		
+		List<Friend> activeFriends = new ArrayList<Friend>();
+		
+		for(Friend friend : user.getFriends())
+		{
+			if(friend.getActive())
+				activeFriends.add(friend);	
+		}
+		
+		return activeFriends;
 	}
 }

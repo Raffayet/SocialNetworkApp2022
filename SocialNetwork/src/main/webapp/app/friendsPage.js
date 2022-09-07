@@ -1,27 +1,7 @@
 Vue.component("friendsPage",{
 	data(){
         return{
-            friends:null,
-            editForm: {
-				username:'',
-                oldPassword: '',
-                newPassword:'',
-                confirmPassword:'',
-                email:'',
-                firstName:'',
-                lastName:''
-            }, 
-            
-            password:'',
-            profileImg:'',
-            
-            path: './images/' + this.$route.params.username + 'Profile.jpg',
-            loadedImages: [],
-            
-            validationError: false,
-			oldPasswordError: false,
-			confirmPasswordError:false,
-			oldBeforeNewError:false
+            friends:''
         }
     },
 	template:
@@ -42,13 +22,9 @@ Vue.component("friendsPage",{
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
 				<div class='friends-section'>
 					<h2>Friends</h2>
-					<div class='friend-row'>
-						gdasghasfh
-						<button id="logout-button" style="backgroundColor:blue; border:blue; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="back" type="button">View</button>
-						<button id="logout-button" style="backgroundColor:#4682B4; border:green; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="back" type="button">Message</button>
-					</div>
-					<div class='friend-row'>
-						gdasghasfh
+					<div class='friend-row' v-for="friend in this.friends">
+						<img :src="friend.profileImg.path" width="45px" height="45px" style="marginRight:10px;"/>
+					    {{friend.firstName}} {{friend.lastName}} (@{{friend.username}})
 						<button id="logout-button" style="backgroundColor:blue; border:blue; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="back" type="button">View</button>
 						<button id="logout-button" style="backgroundColor:#4682B4; border:green; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="back" type="button">Message</button>
 					</div>
@@ -81,30 +57,15 @@ Vue.component("friendsPage",{
 	}
 	,
 	mounted(){
-			document.getElementById('profile-icon').src=this.path;
-			axios.get('rest/feed')
-                 .then((res) => {
-                     //Perform Success Action
-					console.log("Uspesno dobijeni postovi!");
-					this.friends = res.data;
-					console.log(this.friends);
-					//axios.get('rest/user/findByUsername')
-                 })
-                 .catch((error) => {
-                     this.submitError = true;
-                 }).finally(() => {
-                     //Perform action in always
-                 });
-                 
-            
+
+                    
 	},
 	
 	created(){
 		
-		axios.get('rest/user/images/' + this.$route.params.username)
+		axios.get('rest/user/friends/' + this.$route.params.username)
             	.then((res) => {
-					this.loadedImages = res.data;
-					console.log(this.loadedImages[0])
+					this.friends = res.data;
                  })
                  .catch((error) => {
 
