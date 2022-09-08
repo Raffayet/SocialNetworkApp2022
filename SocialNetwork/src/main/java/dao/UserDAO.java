@@ -195,4 +195,18 @@ public class UserDAO {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
 		potentialFriend.getFriendRequests().add(new FriendRequest(username, potentialFriend.getUsername(), RequestStatus.PENDING, LocalDate.now().format(formatter).toString()));
 	}
+
+	public List<Friend> getMutualFriends(User user, User friend, List<Friend> activeFriends) {
+		List<Friend> mutualFriends = new ArrayList<Friend>();
+		for(Friend usersFriend : user.getFriends())
+		{
+			for(Friend friendsFriend : friend.getFriends())
+			{
+				if(usersFriend.getUsername().equals(friendsFriend.getUsername()))
+					mutualFriends.add(usersFriend);
+			}
+		}
+		
+		return mutualFriends;
+	}
 }

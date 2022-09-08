@@ -7,7 +7,8 @@ Vue.component("friendProfile",{
             path: './images/' + this.$route.params.friendUsername + 'Profile.jpg',
             loadedImages: [],
             friend:'',
-            "friendRemoval":true
+            "friendRemoval":true,
+            "mutualFriends":[]
         }
     },
 	template:
@@ -30,6 +31,15 @@ Vue.component("friendProfile",{
 				<h3 style="color:white; marginLeft:46%;">{{this.friend.username}}</h3>
 				<h4 style="color:white; marginLeft:42%;">{{this.friend.firstName}} {{this.friend.lastName}}</h4>
 				<h4 style="color:white; marginLeft:42%; marginBottom:30px;">{{this.friend.birthDate}}</h4>
+				<h4 style="color:white; marginLeft:39%; marginBottom:30px;">Mutual Friends</h4>
+				
+				<div class='mutual-friends-section'>
+					<div class='mutual-friend-row' v-for="mutualFriend in this.mutualFriends">
+						<img :src="mutualFriend.profileImg.path" width="45px" height="45px" style="marginRight:10px;"/>
+					    {{mutualFriend.firstName}} {{mutualFriend.lastName}} (@{{mutualFriend.username}})
+					</div>
+				</div>
+				
 				<div class="my-images" v-for="loadedImage in this.loadedImages">
 					<img class='single-image' :src="loadedImage.path" width="180px" height="180px" @click="viewPost(loadedImage.path)"/>
 				</div>
@@ -120,6 +130,17 @@ Vue.component("friendProfile",{
             	.then((res) => {
 					this.loadedImages = res.data;
 					console.log(this.loadedImages[0])
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
+                 
+        axios.get('rest/user/mutual-friends/' + this.$route.params.username + '/' + this.$route.params.friendUsername)
+            	.then((res) => {
+					this.mutualFriends = res.data;
+					console.log(this.mutualFriends)
                  })
                  .catch((error) => {
 

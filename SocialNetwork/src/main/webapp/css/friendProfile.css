@@ -33,3 +33,24 @@
 	border: green;
 	cursor: pointer;
 }
+
+.mutual-friends-section{
+	color:white;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.mutual-friend-row{
+	height: 50px;
+	margin-left: 20px;
+	opacity: 0.85;
+	background-color: #708090;
+	border-radius: 10px;
+	text-align: center;
+	margin-bottom:10px;
+}
+
+.mutual-friend-row button{
+	margin-right: 0px;
+	margin-top:5px;
+}

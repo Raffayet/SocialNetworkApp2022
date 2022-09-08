@@ -219,4 +219,27 @@ public class UserService {
 		userDao.makeFriendRequest(potentialFriend, username);
 		return Response.status(200).build(); 
 	}
+	
+	@GET
+	@Path("/mutual-friends/{username}/{friendUsername}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getMutualFriends(@PathParam("username") String username, @PathParam("friendUsername") String friendUsername) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User user = userDao.getByUsername(username);
+		User friend = userDao.getByUsername(friendUsername);
+		
+		List<Friend> activeFriends = userDao.getUserFriends(user);
+		
+		List<Friend> mutualFriends = userDao.getMutualFriends(user, friend, activeFriends);
+		
+		List<User> mutualFriendsToUsers = new ArrayList<User>();
+		
+		for(Friend mutualFriend : mutualFriends)
+		{
+			mutualFriendsToUsers.add(userDao.getByUsername(mutualFriend.getUsername()));
+		}
+		
+		return mutualFriendsToUsers;
+	}
 }
