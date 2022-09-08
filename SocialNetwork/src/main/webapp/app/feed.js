@@ -2,12 +2,17 @@ Vue.component("feed",{
 	data(){
         return{
             friends:null,
-            loggedUser: '' 
+            loggedUser: '' ,
+            imagePath: "./images/pera1.jpg" ,
+			description: '',
+			comments:'',
+			 friends:'',
         }
     },
 	template:
 	`
 		<div class='root'>
+		<br><br>
 			<div style="display:flex;">
 				<div class="d-flex justify-content-center h-100">
     				<div class="searchbar">
@@ -24,8 +29,34 @@ Vue.component("feed",{
 				<button id="logout-button" style="backgroundColor:#FF416C; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:10px; cursor:pointer;" v-on:click="logOut" type="button">Log Out</button>
         	</div>
 			<div class="container" style="marginTop: -220px; width:1000px; background: transparent; background:rgba(1,1,1,0.75);">
-				<p style="color:white; fontSize:20px;">Dobro dosli</p>
-			</div>
+				<div class='friend-row' v-for="friend in this.friends">
+				   <div class='friend-row' v-for="post in friend.posts" >
+				  
+				   <br>
+				   	<img :src="post.picture.path"  width="900px" height="500px" style="marginLeft:50px;border-radius:10px;"/>
+				   	<br><br>
+			     	 <div align="center" style="color:white">
+				   {{post.text}}
+				   <br><br>
+				   <input placeholder="ostavite vas komentar"  style="border-radius:10px; width:800px"/>  <br><br> 
+				   
+				   <button  style="border-radius:10px;">add comment</button>
+				   <br><br>
+				     <div class='friend-row' v-for="comment in post.comments" >
+				     	<div class='comment'>
+				     	        {{comment.publisher}}:{{comment.text}}
+				     			
+				     			</div>
+				     </div>
+				   </div>
+				   
+					<br>		
+					
+					</div>
+				</div>
+				</div>
+			<link rel="stylesheet" href="css/viewPost.css" type="text/css">
+		</div>
 		</div>
 	`
 	,
@@ -36,11 +67,15 @@ Vue.component("feed",{
 		
 		},
 		
+		
 		selectPosts: function(post, user){
 			console.log(post.text);
 			this.$router.push({name:'post', params:{post:post, user:user}});
 		},
-		
+		viewPost: function(imagePath){
+			const imagePathParts = imagePath.split('/')
+			this.$router.push('/viewPost/' + this.$route.params.username + '/' + imagePathParts[2]); //odnosi se na sufiks putanje
+		},
 		logOut: function(){
 			axios.post('rest/login/logout')
 				.then((res) => {
@@ -64,6 +99,24 @@ Vue.component("feed",{
 		
 		friendsPage: function(){
 			this.$router.push('/friendsPage/' + this.$route.params.username);
+			
+			
+		},
+		
+		back: function(){
+			this.$root.$router.push('/viewProfile/' + this.$route.params.username)
+		},
+		
+		deletePost: function(){
+			axios.delete('rest/user/delete-post/' + this.$route.params.username + '/' + this.$route.params.imageId)
+            	.then((res) => {
+					this.$root.$router.push('/viewProfile/' + this.$route.params.username)
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
 		}
 	}
 	,
@@ -83,10 +136,32 @@ Vue.component("feed",{
 			},
 			
 	created(){
-		
+		console.log(this.$route.params.imageId)
 		axios.get('rest/user/' + this.$route.params.username)
             	.then((res) => {
 					console.log(res.data)
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
+                 
+                axios.get('rest/user/friends/' + this.$route.params.username)
+            	.then((res) => {
+					this.friends = res.data;
+					console.log(this.friends)
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
+                 
+                 axios.get('rest/user/post/' + this.$route.params.username + '/pera.jpg' )
+            	.then((res) => {
+					this.description = res.data.text;
+					this.comments = res.data.comments;
                  })
                  .catch((error) => {
 
