@@ -75,6 +75,7 @@ public class UserService {
 		return Response.status(200).build();
 	}
 	
+
 	@GET
 	@Path("{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -178,4 +179,12 @@ public class UserService {
 		userDao.changeRequestStatus(user, sender, statusType);
 		return Response.status(200).build();
 	}
+
+	@POST
+	@Path("/posts")
+	public String fun() {
+		return "posts";
+	}
+	
+
 }
