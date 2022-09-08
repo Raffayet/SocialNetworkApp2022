@@ -25,9 +25,11 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 
 import beans.Friend;
+import beans.FriendRequest;
 import beans.Image;
 import beans.Post;
 import beans.User;
+import enums.RequestStatus;
 
 public class UserDAO {
 	private Map<String, User> users = new HashMap<>();
@@ -141,5 +143,37 @@ public class UserDAO {
 		}
 		
 		return activeFriends;
+	}
+
+	public List<FriendRequest> getFriendRequests(User user) {
+		
+		List<FriendRequest> pendingFriendRequests = new ArrayList<FriendRequest>();
+		
+		for(FriendRequest friendRequest : user.getFriendRequests())
+		{
+			if(friendRequest.getState().equals(RequestStatus.PENDING))
+				pendingFriendRequests.add(friendRequest);
+		}
+		return pendingFriendRequests;
+	}
+
+	public void changeRequestStatus(User user, String sender, String statusType) {
+		for (FriendRequest friendRequest : user.getFriendRequests())
+		{
+			if(friendRequest.getSender().equals(sender))
+			{
+				if(statusType.equals("accept"))
+				{
+					friendRequest.setState(RequestStatus.ACCEPTED);
+					List<Friend> oldFriends = user.getFriends();
+					oldFriends.add(new Friend(sender, true));
+					user.setFriends(oldFriends);
+				}
+		
+				else
+					friendRequest.setState(RequestStatus.REJECTED);
+			}
+		}
+		
 	}
 }

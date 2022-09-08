@@ -1,7 +1,10 @@
 Vue.component("friendsPage",{
 	data(){
         return{
-            friends:''
+            friends:'',
+            friendRequests:'',
+            accept:"accept",
+            reject:"reject"
         }
     },
 	template:
@@ -25,12 +28,18 @@ Vue.component("friendsPage",{
 					<div class='friend-row' v-for="friend in this.friends">
 						<img :src="friend.profileImg.path" width="45px" height="45px" style="marginRight:10px;"/>
 					    {{friend.firstName}} {{friend.lastName}} (@{{friend.username}})
-						<button id="logout-button" style="backgroundColor:blue; border:blue; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="back" type="button">View</button>
-						<button id="logout-button" style="backgroundColor:#4682B4; border:green; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" v-on:click="back" type="button">Message</button>
+						<button id="logout-button" style="backgroundColor:blue; border:blue; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" type="button">View</button>
+						<button id="logout-button" style="backgroundColor:#4682B4; border:green; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" type="button">Message</button>
 					</div>
 				</div>
 				<div class='requests-section'>
 					<h2>Friend Requests</h2>
+					<div class='friend-req-row' v-for="friendReq in this.friendRequests">
+						<img :src="friendReq .profileImg.path" width="45px" height="45px" style="marginRight:10px;"/>
+					    {{friendReq.firstName}} {{friendReq.lastName}} (@{{friendReq.username}})
+						<button id="logout-button" style="backgroundColor:green; border:green; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" @click="changeRequestStatus(this.accept, friendReq.username, $event)" type="button">Accept</button>
+						<button id="logout-button" style="backgroundColor:red; border:red; height: 40px; padding:0 5px; flexDirection:row; borderRadius:10px; marginBottom: 15px; marginLeft:30px; cursor:pointer;" @click="changeRequestStatus(this.reject, friendReq.username, $event)" type="button">Reject</button>
+					</div>
 				</div>
 				<div class='dm-section'>
 					<h2>Direct Messages</h2>
@@ -53,12 +62,22 @@ Vue.component("friendsPage",{
 		viewPost: function(imagePath){
 			const imagePathParts = imagePath.split('/')
 			this.$router.push('/viewPost/' + this.$route.params.username + '/' + imagePathParts[2]); //odnosi se na sufiks putanje
+		},
+		
+		changeRequestStatus: function(statusType, sender, event){
+			axios.post('rest/user/change-request-status/' + this.$route.params.username + '/' + sender + '/' + statusType)
+				.then((res) => {
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
 		}
 	}
 	,
 	mounted(){
-
-                    
+   
 	},
 	
 	created(){
@@ -72,5 +91,15 @@ Vue.component("friendsPage",{
                  }).finally(() => {
                      //Perform action in always
                  });
+                
+        axios.get('rest/user/friend-requests/' + this.$route.params.username)
+            	.then((res) => {
+					this.friendRequests = res.data;
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });   
 	}
 })

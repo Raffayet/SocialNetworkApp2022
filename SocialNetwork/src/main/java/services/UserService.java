@@ -27,6 +27,7 @@ import javax.ws.rs.core.Response;
 import enums.Gender;
 import enums.UserType;
 import beans.Friend;
+import beans.FriendRequest;
 import beans.Image;
 import beans.Post;
 import beans.User;
@@ -146,5 +147,35 @@ public class UserService {
 		}
 		
 		return activeFriendsToUsers;
+	}
+	
+	@GET
+	@Path("/friend-requests/{username}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getFriendRequests(@PathParam("username") String username) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User user = userDao.getByUsername(username);
+		List<FriendRequest> pendingFriendRequests = userDao.getFriendRequests(user);
+		
+		List<User> activeFriendRequestsToUsers = new ArrayList<User>();
+		
+		for(FriendRequest friendRequest : pendingFriendRequests)
+		{
+			activeFriendRequestsToUsers.add(userDao.getByUsername(friendRequest.getSender()));
+		}
+		
+		return activeFriendRequestsToUsers;
+	}
+	
+	@POST
+	@Path("/change-request-status/{username}/{sender}/{statusType}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response changeRequestStatus(@PathParam("username") String username, @PathParam("sender") String sender, @PathParam("statusType") String statusType) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User user = userDao.getByUsername(username);
+		userDao.changeRequestStatus(user, sender, statusType);
+		return Response.status(200).build();
 	}
 }
