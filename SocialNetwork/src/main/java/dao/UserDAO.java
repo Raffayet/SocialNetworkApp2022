@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -165,9 +167,6 @@ public class UserDAO {
 				if(statusType.equals("accept"))
 				{
 					friendRequest.setState(RequestStatus.ACCEPTED);
-					List<Friend> oldFriends = user.getFriends();
-					oldFriends.add(new Friend(sender, true));
-					user.setFriends(oldFriends);
 				}
 		
 				else
@@ -175,5 +174,25 @@ public class UserDAO {
 			}
 		}
 		
+	}
+
+	public void makeNewFriend(User user, String sender) {
+		List<Friend> oldBuddies = user.getFriends();
+		oldBuddies.add(new Friend(sender, true));
+		user.setFriends(oldBuddies);
+		users.put(user.getUsername(), user);
+	}
+
+	public void removeFriend(User user, String friendUsername) {
+		for (Friend friend : user.getFriends())
+		{
+			if(friend.getUsername().equals(friendUsername))
+				friend.setActive(false);
+		}
+	}
+
+	public void makeFriendRequest(User potentialFriend, String username) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+		potentialFriend.getFriendRequests().add(new FriendRequest(username, potentialFriend.getUsername(), RequestStatus.PENDING, LocalDate.now().format(formatter).toString()));
 	}
 }
