@@ -8,24 +8,26 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class Post {
-	private String picture;
+	private Image picture;
 	private String text;
 	private List<Comment> comments;
+	private Boolean deleted;
 	
 	public Post() {}
 
-	public Post(String picture, String text, List<Comment> comments) {
+	public Post(Image picture, String text, List<Comment> comments, Boolean deleted) {
 		super();
 		this.picture = picture;
 		this.text = text;
 		this.comments = comments;
+		this.deleted = deleted;
 	}
 
-	public String getPicture() {
+	public Image getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(Image picture) {
 		this.picture = picture;
 	}
 
@@ -49,7 +51,12 @@ public class Post {
 	public String toString() {
 		return "Post [picture=" + picture + ", text=" + text + "]";
 	}
-	
-	
-	
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 }

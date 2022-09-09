@@ -1,9 +1,12 @@
 body {
 	height: 100%;
+	background-image: url('../images/background.jpg');
+	background-color: red;
 }
 
 #login{
 	background-color: red;
+	margin-top: 250px;
 }
 
 .btn btn-primary{

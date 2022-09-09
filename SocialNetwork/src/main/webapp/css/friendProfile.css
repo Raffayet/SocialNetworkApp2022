@@ -1,0 +1,56 @@
+.my-images{
+	display: inline;
+  	grid-template-columns: auto auto auto auto;
+  	padding: 10px 10px 10px 10px;
+  	margin-left: 90px;
+  	padding-top: 30px;
+}
+
+.single-image{                      /* don't grow, don't shrink, width */
+	border-radius: 30px;
+	margin-bottom: 30px;
+	cursor: pointer;
+}
+
+.single-image:hover{
+	opacity: 0.4;
+}
+
+.remove-friend-button{
+	margin-top: 320px;
+	margin-left: 100px;
+	border-radius: 30px;
+	background-color: red;
+	border:red;
+	cursor: pointer;
+}
+
+.add-friend-button{
+	margin-top: 320px;
+	margin-left: 100px;
+	border-radius: 30px;
+	background-color: green;
+	border: green;
+	cursor: pointer;
+}
+
+.mutual-friends-section{
+	color:white;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.mutual-friend-row{
+	height: 50px;
+	margin-left: 20px;
+	opacity: 0.85;
+	background-color: #708090;
+	border-radius: 10px;
+	text-align: center;
+	margin-bottom:10px;
+}
+
+.mutual-friend-row button{
+	margin-right: 0px;
+	margin-top:5px;
+}

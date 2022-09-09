@@ -1,0 +1,48 @@
+.container{
+	display: block;
+}
+
+.friends-section{
+	color:white;
+	margin-top: 20px;
+}
+
+.friend-row{
+	height: 50px;
+	margin-left: 20px;
+	opacity: 0.85;
+	background-color: #708090;
+	border-radius: 10px;
+	text-align: center;
+	margin-bottom:10px;
+}
+
+.friend-row button{
+	margin-right: 0px;
+	margin-top:5px;
+}
+
+.requests-section{
+	color:white;
+	margin-top: 20px;
+}
+
+.friend-req-row{
+	height: 50px;
+	margin-left: 20px;
+	opacity: 0.85;
+	background-color: #708090;
+	border-radius: 10px;
+	text-align: center;
+	margin-bottom:10px;
+}
+
+.friend-req-row button{
+	margin-right: 0px;
+	margin-top:5px;
+}
+
+.dm-section{
+	color:white;
+	margin-top: 20px;
+}

@@ -9,19 +9,505 @@
         "birthDate": "15.02.1999.",
         "gender": "MALE",
         "userType": "ADMINISTRATOR",
-        "profileImg": "http://placehold.it/32x32",
+        "profileImg": {
+        	"path": "./images/peraProfile.jpg",
+        	"deleted": false
+        },
         "isPrivate": true
      },
      { 
         "username":"pera", 
         "password": "pera", 
-        "email": "admin@gmail.com",
-        "firstName": "Admin",
-        "lastName": "Adminic",
+        "email": "pera@gmail.com",
+        "firstName": "Pera",
+        "lastName": "Peric",
         "birthDate": "15.02.1999.",
         "gender": "MALE",
         "userType": "REGULAR_USER",
-        "profileImg": "http://placehold.it/32x32",
+        "profileImg": {
+        	"path": "./images/peraProfile.jpg",
+        	"deleted": false
+        },
+        "images":[{"path": "./images/pera1.jpg", "deleted": false},
+        		  {"path": "./images/pera2.jpg", "deleted": false}, 
+        		  {"path": "./images/pera3.jpg", "deleted": false}],
+        "friends":[{"username": "mara", "active": true},
+        		   {"username": "toma", "active": true}],
+        "posts": [
+        	{
+        		"picture": {"path": "./images/pera1.jpg", "deleted": false},
+        		"text": "Roses are red, violets are blue.",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "Ne svidja mi se.",
+        				"deleted": false
+        			},
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/pera2.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Madjarske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/pera3.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Turske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	}
+       ],
+       
+       "friendRequests": [
+       		{
+       			"sender": "zika",
+       			"recipient": "pera",
+       			"status": "PENDING",
+       			"date": "13.12.2020."
+       		},
+       		{
+       			"sender": "bata",
+       			"recipient": "pera",
+       			"status": "PENDING",
+       			"date": "13.12.2021."
+       		}
+       ],
+       
+        "isPrivate": true
+     },
+     { 
+        "username":"mara", 
+        "password": "mara", 
+        "email": "mara@gmail.com",
+        "firstName": "Mara",
+        "lastName": "Maric",
+        "birthDate": "15.02.1999.",
+        "gender": "FEMALE",
+        "userType": "REGULAR_USER",
+        "profileImg": {"path": "./images/maraProfile.jpg", "deleted": false},
+        "images":[{"path": "./images/mara1.jpg", "deleted": false},
+        		  {"path": "./images/mara2.jpg", "deleted": false}, 
+        		  {"path": "./images/mara3.jpg", "deleted": false}],
+        		  
+        "friends":[{"username": "pera", "active": true},
+        		   {"username": "toma", "active": true}],
+        		  
+        "posts":[{
+        		"picture": {"path": "./images/mara1.jpg", "deleted": false},
+        		"text": "Roses are red, violets are blue.",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "Ne svidja mi se.",
+        				"deleted": false
+        			},
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/mara2.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Madjarske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/mara3.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Turske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	}],
+        	
+        "friendRequests":[],
+                
+        "isPrivate": true
+     },
+     { 
+        "username":"toma", 
+        "password": "toma", 
+        "email": "toma@gmail.com",
+        "firstName": "Toma",
+        "lastName": "Tomic",
+        "birthDate": "15.02.1999.",
+        "gender": "MALE",
+        "userType": "REGULAR_USER",
+        "profileImg": {"path": "./images/tomaProfile.jpg", "deleted": false},
+        "images":[{"path": "./images/toma1.jpg", "deleted": false},
+        		  {"path": "./images/toma2.jpg", "deleted": false}, 
+        		  {"path": "./images/toma3.jpg", "deleted": false}],
+        		  
+        "friends":[{"username": "pera", "active": true},
+        		   {"username": "mara", "active": true}],
+        		   
+        "posts":[{
+        		"picture": {"path": "./images/toma1.jpg", "deleted": false},
+        		"text": "Roses are red, violets are blue.",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "Ne svidja mi se.",
+        				"deleted": false
+        			},
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/toma2.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Madjarske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/toma3.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Turske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	}],
+        
+        "friendRequests":[],	
+        
+        "isPrivate": true
+     },
+     
+     { 
+        "username":"zika", 
+        "password": "zika", 
+        "email": "zika@gmail.com",
+        "firstName": "Zika",
+        "lastName": "Zikic",
+        "birthDate": "15.02.1999.",
+        "gender": "MALE",
+        "userType": "REGULAR_USER",
+        "profileImg": {"path": "./images/zikaProfile.jpg", "deleted": false},
+        "images":[{"path": "./images/zika1.jpg", "deleted": false},
+        		  {"path": "./images/zika2.jpg", "deleted": false}, 
+        		  {"path": "./images/zika3.jpg", "deleted": false}],
+        "posts":[{
+        		"picture": {"path": "./images/zika1.jpg", "deleted": false},
+        		"text": "Roses are red, violets are blue.",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "Ne svidja mi se.",
+        				"deleted": false
+        			},
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/zika2.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Madjarske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/zika3.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Turske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	}],
+        	
+        "friendRequests":[],	
+        
+        "isPrivate": true
+     },
+     
+      { 
+        "username":"bata", 
+        "password": "bata", 
+        "email": "bata@gmail.com",
+        "firstName": "Bata",
+        "lastName": "Batic",
+        "birthDate": "15.02.1999.",
+        "gender": "MALE",
+        "userType": "REGULAR_USER",
+        "profileImg": {"path": "./images/bataProfile.jpg", "deleted": false},
+        "images":[{"path": "./images/bata1.jpg", "deleted": false},
+        		  {"path": "./images/bata2.jpg", "deleted": false}, 
+        		  {"path": "./images/bata3.jpg", "deleted": false}],
+        "posts":[{
+        		"picture": {"path": "./images/bata1.jpg", "deleted": false},
+        		"text": "Roses are red, violets are blue.",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "Ne svidja mi se.",
+        				"deleted": false
+        			},
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Odlicna slika!",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/bata2.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Madjarske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	},
+        	
+        	{
+        		"picture": {"path": "./images/bata3.jpg", "deleted": false},
+        		"text": "Jedna lepa slika iz Turske",
+        		"comments": [
+        			{
+        				"publisher": "toma",
+        				"date": "13.12.2000.",
+        				"editDate": "13.12.2000.",
+        				"text": "Smekeru!",
+        				"deleted": false
+        			},
+        			
+        			{
+        				"publisher": "mara",
+        				"date": "13.12.2020.",
+        				"editDate": "13.12.2020.",
+        				"text": "<3",
+        				"deleted": false
+        			}
+        		],
+        		"deleted": false
+        	}],
+        	
+        "friendRequests":[],	
+        	
         "isPrivate": true
      }
  ]
