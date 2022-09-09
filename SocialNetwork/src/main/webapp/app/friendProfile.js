@@ -41,7 +41,7 @@ Vue.component("friendProfile",{
 				</div>
 				
 				<div class="my-images" v-for="loadedImage in this.loadedImages">
-					<img class='single-image' :src="loadedImage.path" width="180px" height="180px" @click="viewPost(loadedImage.path)"/>
+					<img class='single-image' :src="loadedImage.path" width="180px" height="180px" @click="viewFriendsPost(loadedImage.path)"/>
 				</div>
 				<button v-if="friendRemoval" class='remove-friend-button' style="marginBottom:30px;" @click="addRemoveFriend">Remove Friend</button>
 				<button v-if="!friendRemoval" class='add-friend-button' style="marginBottom:30px;" @click="addRemoveFriend">Add Friend</button>
@@ -60,9 +60,9 @@ Vue.component("friendProfile",{
 			this.$root.$router.push('/friendsPage/' + this.$route.params.username)
 		},
 		
-		viewPost: function(imagePath){
+		viewFriendsPost: function(imagePath){
 			const imagePathParts = imagePath.split('/')
-			this.$router.push('/viewPost/' + this.$route.params.username + '/' + imagePathParts[2]); //odnosi se na sufiks putanje
+			this.$router.push('/viewFriendsPost/' + this.$route.params.username + '/' + this.$route.params.friendUsername + '/' + imagePathParts[2]); //odnosi se na sufiks putanje
 		},
 		
 		addRemoveFriend: function(){
