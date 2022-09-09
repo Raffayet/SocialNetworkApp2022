@@ -1,22 +1,18 @@
 package services;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-
-
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSessionContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -24,14 +20,15 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import enums.Gender;
-import enums.UserType;
+import beans.Comment;
 import beans.Friend;
 import beans.FriendRequest;
 import beans.Image;
 import beans.Post;
 import beans.User;
 import dao.UserDAO;
+import enums.Gender;
+import enums.UserType;
 
 @Path("/user")
 public class UserService {
@@ -242,4 +239,20 @@ public class UserService {
 		
 		return mutualFriendsToUsers;
 	}
+	
+	@POST
+    @Path("/posts/add-comment/{username}/{postPublisher}/{comment}/{imageID}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addComments(@PathParam("username") String username, @PathParam("postPublisher") String postPublisher, @PathParam("comment") String comment, @PathParam("imageID") String imageID) {
+        UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+        User publisher = userDao.getByUsername(postPublisher);
+        Post post = userDao.getPostByPicture(publisher, imageID);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        post.getComments().add(new Comment(username, LocalDate.now().format(formatter).toString(), LocalDate.now().format(formatter).toString(), comment, false));
+        //dodati date formater
+
+        return Response.status(200).build();
+    }
 }
+
