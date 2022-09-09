@@ -137,6 +137,7 @@ public class UserService {
 	public List<User> getUserFriends(@PathParam("username") String username) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		User user = userDao.getByUsername(username);
+		
 		List<Friend> activeFriends = userDao.getUserFriends(user);
 		
 		List<User> activeFriendsToUsers = new ArrayList<User>();
@@ -155,6 +156,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getFriendRequests(@PathParam("username") String username) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		
 		User user = userDao.getByUsername(username);
 		List<FriendRequest> pendingFriendRequests = userDao.getFriendRequests(user);
 		
@@ -176,6 +178,68 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		User user = userDao.getByUsername(username);
 		userDao.changeRequestStatus(user, sender, statusType);
+		if(statusType.equals("accept"))
+		{
+			userDao.makeNewFriend(user, sender);//person'side
+			
+			User friend = userDao.getByUsername(sender);
+			
+			userDao.makeNewFriend(friend, username);
+		}
+		
 		return Response.status(200).build();
+	}
+	
+	@DELETE
+	@Path("/remove-friend/{username}/{friendUsername}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response removeFriend(@PathParam("username") String username, @PathParam("friendUsername") String friendUsername) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User user = userDao.getByUsername(username); 
+		
+		//from person's side
+		userDao.removeFriend(user, friendUsername);
+		
+		User friend = userDao.getByUsername(friendUsername);
+		
+		//from friend's side
+		userDao.removeFriend(friend, username);
+		
+		return Response.status(200).build(); 
+	}
+	
+	@POST
+	@Path("/make-friend-request/{username}/{friendUsername}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addFriend(@PathParam("username") String username, @PathParam("friendUsername") String friendUsername) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User potentialFriend = userDao.getByUsername(friendUsername); 
+		userDao.makeFriendRequest(potentialFriend, username);
+		return Response.status(200).build(); 
+	}
+	
+	@GET
+	@Path("/mutual-friends/{username}/{friendUsername}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getMutualFriends(@PathParam("username") String username, @PathParam("friendUsername") String friendUsername) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User user = userDao.getByUsername(username);
+		User friend = userDao.getByUsername(friendUsername);
+		
+		List<Friend> activeFriends = userDao.getUserFriends(user);
+		
+		List<Friend> mutualFriends = userDao.getMutualFriends(user, friend, activeFriends);
+		
+		List<User> mutualFriendsToUsers = new ArrayList<User>();
+		
+		for(Friend mutualFriend : mutualFriends)
+		{
+			mutualFriendsToUsers.add(userDao.getByUsername(mutualFriend.getUsername()));
+		}
+		
+		return mutualFriendsToUsers;
 	}
 }

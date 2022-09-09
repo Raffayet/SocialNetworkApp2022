@@ -141,6 +141,10 @@
         "images":[{"path": "./images/mara1.jpg", "deleted": false},
         		  {"path": "./images/mara2.jpg", "deleted": false}, 
         		  {"path": "./images/mara3.jpg", "deleted": false}],
+        		  
+        "friends":[{"username": "pera", "active": true},
+        		   {"username": "toma", "active": true}],
+        		  
         "posts":[{
         		"picture": {"path": "./images/mara1.jpg", "deleted": false},
         		"text": "Roses are red, violets are blue.",
@@ -216,6 +220,9 @@
         		],
         		"deleted": false
         	}],
+        	
+        "friendRequests":[],
+                
         "isPrivate": true
      },
      { 
@@ -231,6 +238,10 @@
         "images":[{"path": "./images/toma1.jpg", "deleted": false},
         		  {"path": "./images/toma2.jpg", "deleted": false}, 
         		  {"path": "./images/toma3.jpg", "deleted": false}],
+        		  
+        "friends":[{"username": "pera", "active": true},
+        		   {"username": "mara", "active": true}],
+        		   
         "posts":[{
         		"picture": {"path": "./images/toma1.jpg", "deleted": false},
         		"text": "Roses are red, violets are blue.",
@@ -306,6 +317,9 @@
         		],
         		"deleted": false
         	}],
+        
+        "friendRequests":[],	
+        
         "isPrivate": true
      },
      
@@ -397,6 +411,9 @@
         		],
         		"deleted": false
         	}],
+        	
+        "friendRequests":[],	
+        
         "isPrivate": true
      },
      
@@ -488,6 +505,9 @@
         		],
         		"deleted": false
         	}],
+        	
+        "friendRequests":[],	
+        	
         "isPrivate": true
      }
  ]
