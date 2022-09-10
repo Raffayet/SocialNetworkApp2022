@@ -43,13 +43,14 @@ Vue.component("feed",{
 				   
 				   <button  style="border-radius:10px; backgroundColor:green;"  v-on:click="addComment(friend.username,post.picture.path)">add comment</button>
 				   <br><br>
-				   <ul>
-				     <div class='friend-row' v-for="comment in post.comments" >
+				  
+				     <div class='friend-row' v-for="comment in post.comments" v-if="!comment.deleted" >
+				     
 				     	<div class='comment'>
-				     	<li>
+				    
 				     	        @{{comment.publisher}}: {{comment.text}}
-				     			 <button style="margin-left:350px; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; " v-on:click="deleteComment(friend.username,post.picture.path)">delete</button>
-				     	</li>
+				     			
+				     	
 				     			</div>
 				     </div>
 				     </ul>
@@ -129,26 +130,7 @@ Vue.component("feed",{
 		
 		
 		},
-		deleteComment:function(publisher,imagepath){
-		const imagePathParts = imagepath.split('/')
-		axios.delete('rest/user/posts/delete-comment/' + this.$route.params.username + '/' + publisher +'/'+ this.comment.text +'/'+ imagePathParts[2])
-            	.then((res) => {
-            	console.log('dsasdasdds')
-            	$("ul").on("click", "button", function(e) {
-    e.preventDefault();
-    $(this).parent().remove();
-});
-					this.$root.$router.push('/feed/' + this.$route.params.username)
-                 })
-                 .catch((error) => {
-
-                 }).finally(() => {
-                     //Perform action in always
-                 });
 		
-		
-		}
-		,
 		postovi :function(){
 	axios.post('user/posts')
 				.then((res) => {

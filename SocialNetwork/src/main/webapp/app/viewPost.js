@@ -27,15 +27,23 @@ Vue.component("viewPost",{
 				<div class='description'>
 					{{this.description}}
 				</div>
+				<ul>
 				<div class='comments-container' v-for="comment in this.comments">
 					<div class='comment'>
+					<li<
 						<span>
 							{{comment.publisher}} ({{comment.date}})
 						</span>
 						<h4>{{comment.text}}</h4>
 						<hr/>
+						 <button style="margin-left:350px; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; " v-on:click="deleteComment(friend.username,post.picture.path)">delete</button>
+						</li>
 					</div>
+					
+					
+					
 				</div>
+				</ul>
 			</div>
 			<link rel="stylesheet" href="css/viewPost.css" type="text/css">
 		</div>
@@ -61,7 +69,28 @@ Vue.component("viewPost",{
                  }).finally(() => {
                      //Perform action in always
                  });
+		},
+		
+		deleteComment:function(publisher,imagepath){
+		const imagePathParts = imagepath.split('/')
+		axios.delete('rest/user/posts/delete-comment/' + this.$route.params.username + '/' + publisher +'/'+ this.comment.text +'/'+ imagePathParts[2]+'/'+this.comment.date)
+            	.then((res) => {
+            	console.log('dsasdasdds')
+            	$("ul").on("click", "button", function(e) {
+    e.preventDefault();
+    $(this).parent().remove();
+});
+					this.$root.$router.push('/feed/' + this.$route.params.username)
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
+		
+		
 		}
+		,
 		
 			
 	},

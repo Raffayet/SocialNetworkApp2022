@@ -268,4 +268,21 @@ public class UserService {
         user.getPosts().add(post);
 		return Response.status(200).build();
     }
+	
+	@DELETE
+    @Path("/posts/delete-comment/{username}/{postPublisher}/{comment}/{imageID}/{date}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteComments(@PathParam("username") String username, @PathParam("postPublisher") String postPublisher, @PathParam("comment") String comment, @PathParam("imageID") String imageID,@PathParam("datum") String datum) {
+        UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+        User publisher = userDao.getByUsername(postPublisher);
+        Post post = userDao.getPostByPicture(publisher, imageID);
+        for(Comment c: post.getComments()) {
+        	if(c.getText().equals(comment) && c.getDate().equals(datum) && c.getPublisher().equals(postPublisher)) {
+        		c.setDeleted(true);
+        	}
+        }
+
+        return Response.status(200).build();
+    }
 }
