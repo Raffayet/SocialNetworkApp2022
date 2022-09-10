@@ -256,23 +256,16 @@ public class UserService {
         return Response.status(200).build();
     }
 	
-	@DELETE
-    @Path("/posts/delete-comment/{username}/{postPublisher}/{comment}/{imageID}")
+	@POST
+    @Path("/add-post/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteComments(@PathParam("username") String username, @PathParam("postPublisher") String postPublisher, @PathParam("comment") String comment, @PathParam("imageID") String imageID,@PathParam("datum") LocalDate datum) {
-        UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-        User publisher = userDao.getByUsername(postPublisher);
-        Post post = userDao.getPostByPicture(publisher, imageID);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-        for(int i=0;i<post.getComments().size();i++) {
-        	if(post.getComments().get(i).equals(new Comment(username,datum.format(formatter),LocalDate.now().format(formatter),comment,false))) {
-        		post.getComments().remove(i);
-        	}
-        }
-        
-        //dodati date formater
-
-        return Response.status(200).build();
+    public Response addPost(HashMap<String, String> body, @PathParam("username") String username) {
+		Post post = new Post(new Image(body.get("picturePath"), false), body.get("text"), new ArrayList<Comment>(), false);
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+        User user = userDao.getByUsername(username);
+        user.getImages().add(post.getPicture());
+        user.getPosts().add(post);
+		return Response.status(200).build();
     }
 }

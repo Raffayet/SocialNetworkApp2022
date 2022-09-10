@@ -131,7 +131,7 @@ Vue.component("feed",{
 		},
 		deleteComment:function(publisher,imagepath){
 		const imagePathParts = imagepath.split('/')
-		axios.delete('rest/user/posts/delete-comment/' + this.$route.params.username + '/' + publisher +'/'+ this.commentText +'/'+ imagePathParts[2])
+		axios.delete('rest/user/posts/delete-comment/' + this.$route.params.username + '/' + publisher +'/'+ this.comment.text +'/'+ imagePathParts[2])
             	.then((res) => {
             	console.log('dsasdasdds')
             	$("ul").on("click", "button", function(e) {
