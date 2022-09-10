@@ -45,6 +45,7 @@ Vue.component("viewProfile",{
 				<div class="my-images" v-for="loadedImage in this.loadedImages">
 					<img class='single-image' :src="loadedImage.path" width="180px" height="180px" @click="viewPost(loadedImage.path)"/>
 				</div>
+				<button id="logout-button" style="backgroundColor:green; border:green; marginLeft:100px; borderRadius:10px; cursor:pointer;" v-on:click="addPost" type="button">Add a post</button>
 			</div>
 			<link rel="stylesheet" href="css/viewProfile.css" type="text/css">
 		</div>
@@ -63,6 +64,10 @@ Vue.component("viewProfile",{
 		viewPost: function(imagePath){
 			const imagePathParts = imagePath.split('/')
 			this.$router.push('/viewPost/' + this.$route.params.username + '/' + imagePathParts[2]); //odnosi se na sufiks putanje
+		},
+		
+		addPost: function(){
+			this.$router.push('/addPost/' + this.$route.params.username)
 		}
 	}
 	,

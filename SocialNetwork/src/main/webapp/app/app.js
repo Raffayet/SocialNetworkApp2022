@@ -7,6 +7,7 @@ const ViewPost = {template:'<viewPost></viewPost>'}
 const FriendsPage = {template:'<friendsPage></friendsPage>'}
 const FriendProfile = {template:'<friendProfile></friendProfile>'}
 const ViewFriendsPost = {template:'<viewFriendsPost></viewFriendsPost>'}
+const AddPost = {template:'<addPost></addPost>'}
 
 
 const router = new VueRouter({
@@ -21,6 +22,7 @@ const router = new VueRouter({
 		{path:'/friendsPage/:username', component:FriendsPage, props:true},
 		{path:'/friendProfile/:username/:friendUsername', component:FriendProfile, props:true},
 		{path:'/viewFriendsPost/:username/:friendUsername/:imageId', component:ViewFriendsPost, props:true},
+		{path:'/addPost/:username', component:AddPost, props:true},
 	]
 });
 
