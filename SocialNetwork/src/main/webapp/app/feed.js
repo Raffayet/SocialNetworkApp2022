@@ -39,16 +39,20 @@ Vue.component("feed",{
 			     	 <div align="center" style="color:white">
 				   {{post.text}}
 				   <br><br>
-				   <input placeholder="ostavite vas komentar" v-model="commentText" style="border-radius:10px; width:800px"/>  <br><br> 
+				   <input placeholder="ostavite vas komentar" v-model="commentText" data-split-icon="delete" style="border-radius:10px; width:800px"/>  <br><br> 
 				   
-				   <button  style="border-radius:10px;"  v-on:click="addComment(friend.username,post.picture.path)">add comment</button>
+				   <button  style="border-radius:10px; backgroundColor:green;"  v-on:click="addComment(friend.username,post.picture.path)">add comment</button>
 				   <br><br>
+				   <ul>
 				     <div class='friend-row' v-for="comment in post.comments" >
 				     	<div class='comment'>
+				     	<li>
 				     	        @{{comment.publisher}}: {{comment.text}}
-				     			
+				     			 <button style="margin-left:350px; height: 40px; padding:0 5px; border:#5dbea3; flexDirection:row; borderRadius:10px; " v-on:click="deleteComment(friend.username,post.picture.path)">delete</button>
+				     	</li>
 				     			</div>
 				     </div>
+				     </ul>
 				   </div>
 				   
 					<br>		
@@ -116,6 +120,25 @@ Vue.component("feed",{
 		axios.post('rest/user/posts/add-comment/' + this.$route.params.username + '/' + publisher +'/'+ this.commentText +'/'+ imagePathParts[2])
             	.then((res) => {
 					
+                 })
+                 .catch((error) => {
+
+                 }).finally(() => {
+                     //Perform action in always
+                 });
+		
+		
+		},
+		deleteComment:function(publisher,imagepath){
+		const imagePathParts = imagepath.split('/')
+		axios.delete('rest/user/posts/delete-comment/' + this.$route.params.username + '/' + publisher +'/'+ this.comment.text +'/'+ imagePathParts[2])
+            	.then((res) => {
+            	console.log('dsasdasdds')
+            	$("ul").on("click", "button", function(e) {
+    e.preventDefault();
+    $(this).parent().remove();
+});
+					this.$root.$router.push('/feed/' + this.$route.params.username)
                  })
                  .catch((error) => {
 

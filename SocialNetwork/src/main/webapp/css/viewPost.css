@@ -43,4 +43,17 @@
 	font-size: 18px;
 }
 
-
+ul {
+    padding: 0;
+    margin: 0;
+    dislay: table;
+    border-spacing: .3em;
+}
+li {
+    list-style: none;
+    display: table-row;
+}
+button {
+    display: table-cell;
+    
+}
