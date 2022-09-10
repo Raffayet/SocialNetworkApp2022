@@ -261,4 +261,17 @@ public class UserService {
 
         return Response.status(200).build();
     }
+	
+	@POST
+    @Path("/add-post/{username}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addPost(HashMap<String, String> body, @PathParam("username") String username) {
+		Post post = new Post(new Image(body.get("picturePath"), false), body.get("text"), new ArrayList<Comment>(), false);
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+        User user = userDao.getByUsername(username);
+        user.getImages().add(post.getPicture());
+        user.getPosts().add(post);
+		return Response.status(200).build();
+    }
 }
